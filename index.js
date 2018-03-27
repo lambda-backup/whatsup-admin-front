@@ -9,7 +9,7 @@ var currentBalance = 0;
 window.onload = function () {
     axios.get('https://icospy.lambda-bots.com/admin/balance')
         .then(function (response) {
-            balance.innerHTML = 'Balance: ' + response.data.result.balance || currentBalance;
+            balance.innerHTML = 'Balance: ' + response.data.result.balance;
             currentBalance = response.data.result.balance;
             pbalance.innerHTML = 'Pending balance: ' + response.data.result.pendingBalance;
         })
@@ -28,9 +28,9 @@ window.onsubmit = function (e) {
     }
     // amount.value = '';
     // wallet.value= '';
-    console.log(typeof JSON.stringify(data))
+    console.log(currentBalance)
 
-    if (amount.value >= currentBalance) {
+    if (amount.value < currentBalance) {
         axios.post('https://icospy.lambda-bots.com/admin/send', data)
             .then(function (response) {
                 console.log(response);
