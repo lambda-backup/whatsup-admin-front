@@ -31,16 +31,16 @@ window.onsubmit = function (e) {
     console.log(currentBalance)
 
     if (amount.value < currentBalance) {
-        axios.post('https://icospy.lambda-bots.com/admin/send', data)
+        axios.post('https://icospy.lambda-bots.com/admin/withdraw', data)
             .then(function (response) {
-                console.log(response);
-                alert('PRIVET');
+                // console.log(response);
+                alert('Transaction was successful');
             })
             .catch(function (error) {
                 console.log(error);
             });
     } else {
-        alert("Seem like you don't have enough money on this wallet :(")
+        alert("Seem like you don't have enough money on this wallet.")
     }
 
 
