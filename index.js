@@ -26,8 +26,8 @@ window.onsubmit = function (e) {
         amount: amount.value,
         wallet: wallet.value
     }
-    // amount.value = '';
-    // wallet.value= '';
+    amount.value = '';
+    wallet.value= '';
     console.log(currentBalance)
 
     if (amount.value < currentBalance) {
