@@ -27,20 +27,20 @@ window.onsubmit = function (e) {
         wallet: wallet.value
     }
     amount.value = '';
-    wallet.value= '';
-    console.log(currentBalance)
+    wallet.value = '';
+    console.log(currentBalance);
 
     if (amount.value < currentBalance) {
         axios.post('https://icospy.lambda-bots.com/admin/withdraw', data)
             .then(function (response) {
-                // console.log(response);
-                alert('Transaction was successful');
+                console.log(response);
+                alert(response.data.message);
             })
             .catch(function (error) {
                 console.log(error);
             });
     } else {
-        alert("Seem like you don't have enough money on this wallet.")
+        alert("Seem like you don't have enough money on this wallet.");
     }
 
 
