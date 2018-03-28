@@ -5,6 +5,7 @@ var wallet = document.getElementById('wallet');
 
 var currentBalance = 0;
 
+var regExp = /^\d+(?:\.\d+)?$/;
 
 window.onload = function () {
     axios.get('https://icospy.lambda-bots.com/admin/balance')
@@ -22,18 +23,23 @@ window.onload = function () {
 window.onsubmit = function (e) {
     e.preventDefault();
 
+    if (!amount.value || !wallet.value) return;
+
+    if (!regExp.test(amount.value)) {
+        alert("Please type an amount that you want to withdraw");
+        return;
+    }
+
     var data = {
         amount: amount.value,
         wallet: wallet.value
     }
     amount.value = '';
     wallet.value = '';
-    console.log(currentBalance);
 
     if (amount.value < currentBalance) {
         axios.post('https://icospy.lambda-bots.com/admin/withdraw', data)
             .then(function (response) {
-                console.log(response);
                 alert(response.data.message);
             })
             .catch(function (error) {
